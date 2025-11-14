@@ -1,68 +1,85 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FaInstagram, FaFacebookF, FaPinterestP } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [bgColor, setBgColor] = useState("bg-transparent");
 
-  // Change navbar background on scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setBgColor("bg-white/90 backdrop-blur-md shadow-md text-gray-800");
+        setBgColor("bg-[#f8f4f0]/90 backdrop-blur-xl shadow-lg");
       } else {
-        setBgColor("bg-transparent text-white");
+        setBgColor("bg-transparent");
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const menuItems = [
+    { name: "home", path: "/" },
+    { name: "services", path: "/services" },
+    { name: "packages", path: "/packages" },
+    { name: "gallery", path: "/gallery" },
+    { name: "contact", path: "/contact" },
+  ];
+
+  const socialLinks = [
+    { Icon: FaInstagram, url: "https://instagram.com/vickyjadhav475" },
+    { Icon: FaFacebookF, url: "https://facebook.com/" }, // replace with your FB
+    { Icon: FaPinterestP, url: "https://pinterest.com/" }, // replace with your Pinterest
+  ];
+
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       className={`fixed w-full z-50 transition-all duration-500 ${bgColor}`}
     >
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo / Brand Name */}
-        <a
-          href="#home"
-          className="font-serif text-2xl sm:text-3xl font-bold tracking-wide hover:text-yellow-600 transition"
+        {/* LOGO */}
+        <Link
+          to="/"
+          className="text-2xl italic tracking-wide font-light text-white hover:text-[#CBB892] transition"
         >
-          Event <span className="text-yellow-500">Planner</span>
-        </a>
+          Elegant Moments
+        </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 font-medium">
-          <li>
-            <a href="#home" className="hover:text-yellow-500 transition">
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#services" className="hover:text-yellow-500 transition">
-              Services
-            </a>
-          </li>
-          <li>
-            <a href="#gallery" className="hover:text-yellow-500 transition">
-              Gallery
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="hover:text-yellow-500 transition">
-              Contact
-            </a>
-          </li>
+        <ul className="hidden md:flex space-x-10 text-gray-300 font-light tracking-wide mx-auto">
+          {menuItems.map((item) => (
+            <motion.li key={item.name} whileHover={{ scale: 1.1 }}>
+              <Link to={item.path} className="hover:text-[#CBB892] transition">
+                {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
+              </Link>
+            </motion.li>
+          ))}
         </ul>
 
-        {/* Hamburger Icon (Mobile) */}
+        {/* Social Icons */}
+        <div className="hidden md:flex space-x-5 text-white text-xl">
+          {socialLinks.map(({ Icon, url }, idx) => (
+            <motion.a
+              key={idx}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.2, color: "#CBB892" }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Icon />
+            </motion.a>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden text-2xl focus:outline-none"
+          className="md:hidden text-3xl text-white focus:outline-none"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -77,8 +94,8 @@ const Navbar = () => {
               strokeWidth="2"
               d={
                 isMenuOpen
-                  ? "M6 18L18 6M6 6l12 12" // X icon
-                  : "M4 6h16M4 12h16M4 18h16" // Hamburger
+                  ? "M6 18L18 6M6 6l12 12"
+                  : "M4 6h16M4 12h16M4 18h16"
               }
             />
           </svg>
@@ -88,50 +105,39 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: isMenuOpen ? 1 : 0, y: isMenuOpen ? 0 : -20 }}
-        transition={{ duration: 0.3 }}
-        className={`md:hidden absolute w-full bg-white/95 backdrop-blur-md shadow-md text-gray-800 transition-all duration-500 ${
-          isMenuOpen ? "block" : "hidden"
-        }`}
+        animate={isMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="md:hidden absolute w-full bg-[#0D0D0D]/95 backdrop-blur-xl shadow-xl text-gray-300"
       >
-        <ul className="flex flex-col items-center space-y-4 py-6 font-medium">
-          <li>
-            <a
-              href="#home"
-              onClick={() => setIsMenuOpen(false)}
-              className="hover:text-yellow-600 transition"
-            >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              href="#services"
-              onClick={() => setIsMenuOpen(false)}
-              className="hover:text-yellow-600 transition"
-            >
-              Services
-            </a>
-          </li>
-          <li>
-            <a
-              href="#gallery"
-              onClick={() => setIsMenuOpen(false)}
-              className="hover:text-yellow-600 transition"
-            >
-              Gallery
-            </a>
-          </li>
-          <li>
-            <a
-              href="#contact"
-              onClick={() => setIsMenuOpen(false)}
-              className="hover:text-yellow-600 transition"
-            >
-              Contact
-            </a>
-          </li>
+        <ul className="flex flex-col items-center space-y-6 py-6 font-light tracking-wide text-lg">
+          {menuItems.map((item) => (
+            <motion.li key={item.name} whileHover={{ scale: 1.05 }}>
+              <Link
+                to={item.path}
+                onClick={() => setIsMenuOpen(false)}
+                className="hover:text-[#CBB892] transition"
+              >
+                {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
+              </Link>
+            </motion.li>
+          ))}
         </ul>
+
+        {/* Mobile Social Icons */}
+        <div className="flex justify-center space-x-6 pb-6 text-white text-xl">
+          {socialLinks.map(({ Icon, url }, idx) => (
+            <motion.a
+              key={idx}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.2, color: "#CBB892" }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Icon />
+            </motion.a>
+          ))}
+        </div>
       </motion.div>
     </motion.nav>
   );

@@ -5,127 +5,146 @@ const Packages = () => {
   const packages = [
     {
       name: "Basic Package",
-      price: "$999",
+      price: "₹9,999 – ₹14,999",
       description:
-        "Simple yet elegant Mandap setup with classic floral decorations and a minimal touch of tradition.",
+        "A clean and simple mandap setup perfect for small weddings and home functions.",
       features: [
-        "Basic Mandap Design",
-        "Standard Floral Arrangements",
+        "Simple Mandap Setup",
+        "Basic Flower Decoration",
+        "Cloth Backdrop",
         "Setup & Takedown",
-        "1 Hour Setup Time",
       ],
       img: "./1.jpg",
     },
     {
       name: "Premium Package",
-      price: "$1999",
+      price: "₹19,999 – ₹29,999",
       description:
-        "An elegant Mandap design with luxurious flowers, soft lighting, and a touch of sophistication.",
+        "A stylish mandap with good flowers, soft lighting, and neat decoration for medium-budget events.",
       features: [
         "Premium Mandap Design",
-        "Enhanced Floral Arrangements",
-        "Elegant Lighting Setup",
+        "Good Quality Flowers",
+        "Soft Lighting",
+        "Entry Decoration",
         "Setup & Takedown",
-        "2 Hour Setup Time",
-        "1 Free Consultation",
       ],
       img: "./2.jpg",
     },
     {
       name: "Deluxe Package",
-      price: "$2999",
+      price: "₹39,999 – ₹59,999",
       description:
-        "The ultimate wedding Mandap experience with custom design, floral art, and breathtaking décor elements.",
+        "A full decoration package with a beautiful mandap, stage backdrop, and floral design.",
       features: [
-        "Custom Mandap Design",
-        "Full Floral Decorations",
-        "Customized Lighting & Decor",
+        "Complete Mandap Setup",
+        "Heavy Floral Decoration",
+        "Stage Backdrop",
+        "Lighting & Side Decor",
         "Setup & Takedown",
-        "4 Hour Setup Time",
-        "Free Design Consultation",
-        "Exclusive Decor Additions",
       ],
-      img: "./3.jpg",
+      img: "./8.jpg",
     },
   ];
 
   return (
     <section id="packages" className="py-20 bg-gradient-to-b from-[#fff9f2] to-white">
       <div className="max-w-7xl mx-auto text-center px-6">
+
         {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           className="text-4xl md:text-5xl font-serif text-gray-900"
         >
-          Our Exclusive Wedding Packages
+          Our Wedding Packages
         </motion.h2>
 
+        {/* Optional short paragraph */}
         <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="mt-4 text-lg text-gray-700 max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="mt-4 text-gray-600 max-w-2xl mx-auto leading-relaxed"
         >
-          Choose from our curated Mandap packages crafted to match every couple’s
-          unique style, from simple elegance to royal grandeur.
+          Choose a package that suits your style and budget. We take care of all the décor details, from the mandap to floral arrangements, to make your wedding day truly special.
         </motion.p>
 
         {/* Package Cards */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <motion.div
+          className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.2 } },
+          }}
+        >
           {packages.map((pkg, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="group relative bg-white rounded-2xl shadow-lg hover:shadow-[0_0_25px_rgba(255,193,7,0.3)] transition-transform transform hover:-translate-y-2 duration-300 overflow-hidden flex flex-col"
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              whileHover={{ scale: 1.03, boxShadow: "0px 15px 35px rgba(0,0,0,0.2)" }}
+              transition={{ duration: 0.5, type: "spring", stiffness: 250 }}
+              className="group relative bg-white rounded-2xl overflow-hidden flex flex-col shadow-lg"
             >
+              
               {/* Image */}
-              <div className="relative">
+              <motion.div
+                className="relative w-full h-64 overflow-hidden"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.5 }}
+              >
                 <img
                   src={pkg.img}
                   alt={pkg.name}
-                  className="w-full h-64 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <p className="absolute bottom-4 left-4 bg-amber-400 text-gray-900 font-semibold px-4 py-1 rounded-full shadow-md">
+                <motion.span
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="absolute bottom-3 left-3 bg-[#C9A874] text-white font-semibold px-4 py-1 rounded-full shadow-lg text-sm"
+                >
                   {pkg.price}
-                </p>
-              </div>
+                </motion.span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              </motion.div>
 
               {/* Content */}
               <div className="flex flex-col flex-grow p-8 text-left">
-                <div>
-                  <h3 className="text-2xl font-semibold text-gray-900">{pkg.name}</h3>
-                  <p className="mt-2 text-gray-700 text-sm">{pkg.description}</p>
+                <h3 className="text-2xl font-semibold text-gray-900">{pkg.name}</h3>
+                <p className="mt-2 text-gray-700 text-sm">{pkg.description}</p>
 
-                  {/* Features */}
-                  <ul className="mt-5 space-y-2 text-gray-600 text-sm">
-                    {pkg.features.map((feature, i) => (
-                      <li key={i} className="flex items-start space-x-2">
-                        <span className="text-amber-500">✦</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* Features */}
+                <ul className="mt-5 space-y-2 text-gray-600 text-sm">
+                  {pkg.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-[#C9A874]">✦</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
 
-                {/* Button pinned bottom */}
-                <div className="mt-auto text-center pt-6">
-                  <a
-                    href="#contact"
-                    className="inline-block bg-gradient-to-r from-amber-400 to-amber-500 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-md hover:shadow-[0_0_20px_rgba(255,200,0,0.4)] hover:scale-105 transition-all duration-300"
+                {/* Button */}
+                <motion.div className="mt-auto text-center pt-6">
+                  <motion.a
+                    href="/contact"
+                    className="inline-block bg-[#C9A874] text-white px-6 py-2 rounded-full text-lg font-semibold shadow-md"
+                    whileHover={{ scale: 1.05, backgroundColor: "#b7905c" }}
+                    transition={{ type: "spring", stiffness: 300 }}
                   >
                     Book Now
-                  </a>
-                </div>
+                  </motion.a>
+                </motion.div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
