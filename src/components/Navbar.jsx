@@ -11,7 +11,7 @@ const Navbar = () => {
   const handleScroll = () => {
     console.log(window.scrollY); // debug
     if (window.scrollY > 50) {
-      setBgColor("bg-[#f8f4f0]/90 backdrop-blur-xl shadow-lg text-gray-900");
+      setBgColor("bg-[black]/90 backdrop-blur-xl shadow-lg text-gray-900");
     } else {
       setBgColor("bg-transparent text-white");
     }
