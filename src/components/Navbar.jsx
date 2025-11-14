@@ -7,17 +7,18 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [bgColor, setBgColor] = useState("bg-transparent");
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setBgColor("bg-[#f8f4f0]/90 backdrop-blur-xl shadow-lg");
-      } else {
-        setBgColor("bg-transparent");
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+ useEffect(() => {
+  const handleScroll = () => {
+    console.log(window.scrollY); // debug
+    if (window.scrollY > 50) {
+      setBgColor("bg-[#f8f4f0]/90 backdrop-blur-xl shadow-lg text-gray-900");
+    } else {
+      setBgColor("bg-transparent text-white");
+    }
+  };
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   const menuItems = [
     { name: "home", path: "/" },
