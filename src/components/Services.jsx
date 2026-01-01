@@ -6,105 +6,105 @@ const Services = () => {
   const services = [
     {
       title: "Weddings & Receptions",
-      subtitle: "Simple • Elegant",
-      img: "./1.jpg",
-      icon: <Heart className="w-8 h-8 text-[#C9A874]" />,
-      btn: "Explore",
+      subtitle:
+        "Stage décor, fresh flower setup & complete lighting arrangement for your big day.",
+      img: "/images/1.jpg",
+      icon: Heart,
     },
     {
       title: "Corporate Events",
-      subtitle: "Clean • Professional",
-      img: "./2.jpg",
-      icon: <Briefcase className="w-8 h-8 text-[#C9A874]" />,
-      btn: "Details",
+      subtitle:
+        "Professional stage setup, banners, seating & branding for corporate functions.",
+      img: "/images/2.jpg",
+      icon: Briefcase,
     },
     {
       title: "Birthdays & Anniversaries",
-      subtitle: "Warm • Family-Friendly",
+      subtitle:
+        "Theme-based decoration, balloon setup & photo backdrops for celebrations.",
       img: "https://i.pinimg.com/736x/c5/dc/a6/c5dca659f08e3aa3dc0d02a98fcc717d.jpg",
-      icon: <Gift className="w-8 h-8 text-[#C9A874]" />,
-      btn: "Plan",
+      icon: Gift,
     },
     {
       title: "Engagements & Housewarmings",
-      subtitle: "Soft • Classy",
+      subtitle:
+        "Traditional décor, floral arrangements & elegant stage design.",
       img: "https://i.pinimg.com/1200x/71/43/63/7143635afbf381f6fa695d7198f36854.jpg",
-      icon: <PartyPopper className="w-8 h-8 text-[#C9A874]" />,
-      btn: "Book",
+      icon: PartyPopper,
     },
   ];
 
   return (
-    <section id="services" className="py-24 bg-[#F6F0E7]">
-      <div className="max-w-7xl mx-auto text-center px-6">
-
+    <section id="services" className="bg-[#F7F2EA] py-24">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-4xl font-serif text-black"
+          className="text-center max-w-3xl mx-auto"
         >
-          We Decorate Your Special Moments
-        </motion.h2>
-
-        {/* Short paragraph */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 text-gray-600 max-w-2xl mx-auto leading-relaxed"
-        >
-          From intimate gatherings to grand celebrations, we craft décor that is soft, elegant, and full of love. Each event is designed to leave lasting memories for you and your guests.
-        </motion.p>
+          <p className="text-xs uppercase tracking-[0.3em] text-[#C9A874] mb-3">
+            What We Do
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#2E2424]">
+            Event Decoration Services
+          </h2>
+          <p className="text-center text-gray-600 mt-6">
+            Decoration is customized as per your budget, venue & function type.
+          </p>
+        </motion.div>
 
         {/* Services Grid */}
-        <motion.div
-          className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.2 } },
-          }}
-        >
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.5, type: "spring", stiffness: 250 }}
-              className="bg-[#F8F4EF] border border-[#D8C29E] rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.08)] overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:-translate-y-2"
-            >
-              {/* Image */}
-              <a
-                href={service.img}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <img
-                  src={service.img}
-                  alt={service.title}
-                  className="w-full h-60 object-cover rounded-t-2xl"
-                />
-              </a>
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => {
+            const Icon = service.icon;
 
-              {/* Title Section */}
-              <div className="p-6 text-center">
-                <div className="flex justify-center mb-3">{service.icon}</div>
-                <h3 className="text-2xl font-semibold font-serif text-[#3B2F2F]">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-[#A08D80] italic mt-1">{service.subtitle}</p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                {/* Image */}
+                <div className="relative h-52">
+                  <img
+                    src={service.img}
+                    alt={service.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/20 transition-opacity"></div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 text-center">
+                  <div className="flex justify-center mb-3">
+                    <Icon className="w-7 h-7 text-[#C9A874]" />
+                  </div>
+
+                  <h3 className="text-lg font-serif text-[#3B2F2F]">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+                    {service.subtitle}
+                  </p>
+
+                  <a
+                    href="tel:+917028060440"
+                    className="mt-5 inline-block text-sm border border-[#C9A874] text-[#C9A874] px-5 py-2 rounded-full
+                               hover:bg-[#C9A874] hover:text-white transition-all duration-300"
+                  >
+                    Call for Booking
+                  </a>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

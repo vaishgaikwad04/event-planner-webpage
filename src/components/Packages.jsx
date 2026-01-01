@@ -14,7 +14,7 @@ const Packages = () => {
         "Cloth Backdrop",
         "Setup & Takedown",
       ],
-      img: "./1.jpg",
+      img: "/images/1.jpg",
     },
     {
       name: "Premium Package",
@@ -28,7 +28,7 @@ const Packages = () => {
         "Entry Decoration",
         "Setup & Takedown",
       ],
-      img: "./2.jpg",
+      img: "/images/2.jpg",
     },
     {
       name: "Deluxe Package",
@@ -42,11 +42,10 @@ const Packages = () => {
         "Lighting & Side Decor",
         "Setup & Takedown",
       ],
-      img: "./8.jpg",
+      img: "/images/8.jpg",
     },
   ];
 
-  // Parent variants for staggered animation
   const containerVariants = {
     hidden: {},
     visible: {
@@ -54,13 +53,15 @@ const Packages = () => {
     },
   };
 
-  // Card animation
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 20 } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 120, damping: 20 },
+    },
   };
 
-  // Inner content animation
   const contentVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -85,7 +86,8 @@ const Packages = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mt-4 text-gray-600 max-w-2xl mx-auto leading-relaxed"
         >
-          Choose a package that suits your style and budget. We take care of all the décor details, from the mandap to floral arrangements, to make your wedding day truly special.
+          Choose a package that suits your style and budget. We take care of all the décor details,
+          from the mandap to floral arrangements, to make your wedding day truly special.
         </motion.p>
 
         {/* Package Cards */}
@@ -104,20 +106,17 @@ const Packages = () => {
               className="group relative bg-white rounded-2xl overflow-hidden flex flex-col shadow-lg"
             >
               {/* Image */}
-              <motion.div className="relative w-full h-64 overflow-hidden">
+              <div className="relative w-full h-64 sm:h-72 lg:h-80 overflow-hidden">
                 <img
                   src={pkg.img}
                   alt={pkg.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <motion.span
-                  variants={contentVariants}
-                  className="absolute bottom-3 left-3 bg-[#C9A874] text-white font-semibold px-4 py-1 rounded-full shadow-lg text-sm"
-                >
+                <span className="absolute bottom-3 left-3 z-10 bg-[#C9A874] text-white font-semibold px-4 py-1 rounded-full shadow-lg text-sm">
                   {pkg.price}
-                </motion.span>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              </motion.div>
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              </div>
 
               {/* Content */}
               <motion.div
@@ -128,7 +127,12 @@ const Packages = () => {
                 <p className="mt-2 text-gray-700 text-sm">{pkg.description}</p>
 
                 {/* Features */}
-                <ul className="mt-5 space-y-2 text-gray-600 text-sm">
+                <motion.ul
+                  className="mt-5 space-y-2 text-gray-600 text-sm"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                >
                   {pkg.features.map((feature, i) => (
                     <motion.li
                       key={i}
@@ -139,7 +143,7 @@ const Packages = () => {
                       <span>{feature}</span>
                     </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
 
                 {/* Button */}
                 <motion.div className="mt-auto text-center pt-6" variants={contentVariants}>

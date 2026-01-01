@@ -1,154 +1,161 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+const Contact = () => {
+  const [form, setForm] = useState({ name: "", phone: "", message: "" });
+  const [success, setSuccess] = useState(false);
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Message sent! We will contact you soon.");
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setSuccess(true);
+    setForm({ name: "", phone: "", message: "" });
+    setTimeout(() => setSuccess(false), 4000);
   };
 
   return (
     <section
       id="contact"
-      className="py-24 px-6 md:px-16 bg-[#fffaf4] text-gray-800"
+      className="py-28 bg-gradient-to-b from-[#FFF8EE] to-white px-6"
     >
-      {/* Title */}
+      {/* Heading */}
       <motion.div
-        className="text-center mb-14"
-        initial={{ opacity: 0, y: -20 }}
+        className="text-center mb-20"
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h1 className="text-4xl font-serif font-semibold text-gray-900">
-          Contact Us
-        </h1>
-        <div className="w-20 h-[3px] bg-[#C9A874] mx-auto mt-3"></div>
+        <p className="text-xs tracking-[0.3em] uppercase text-[#C9A874] mb-3">
+          Contact
+        </p>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#2E2424]">
+          Let’s Plan Your Event
+        </h2>
+        <p className="mt-4 text-gray-600 max-w-xl mx-auto text-[15px] leading-relaxed">
+          Call us directly or send a short enquiry — we’ll respond quickly and professionally.
+        </p>
       </motion.div>
 
-      {/* Layout */}
-      <div className="grid md:grid-cols-2 gap-20 max-w-6xl mx-auto items-start">
-        {/* Left Info Section */}
+      <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
+        {/* LEFT – Contact Info */}
         <motion.div
-          className="space-y-6 pr-10 md:pr-16 leading-relaxed"
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
+          className="bg-white rounded-3xl shadow-xl p-10 space-y-8 hover:shadow-2xl transition-all"
         >
-          <h2 className="text-3xl font-serif font-semibold text-gray-900">
-            Let’s Make Your Moments Beautiful
-          </h2>
+          <h3 className="text-2xl font-serif text-[#2E2424]">Event Planner & Décor</h3>
 
-          <div className="space-y-3 text-gray-700 text-lg">
+          <div className="space-y-4 text-gray-700 text-lg">
             <p>
-              <span className="font-semibold text-gray-900">Email:</span>{" "}
-              <a
-                href="mailto:mendapdecorator@gmail.com"
-                className="underline hover:text-yellow-600"
-              >
-                jadhavvicky117@gmail.com
-              </a>
-            </p>
-
-            <p>
-              <span className="font-semibold text-gray-900">Phone:</span>{" "}
-              <a
-                href="tel:+917028060440"
-                className="underline hover:text-yellow-600"
-              >
+              📞{" "}
+              <a href="tel:+917028060440" className="hover:text-[#C9A874]">
                 +91 70280 60440
               </a>
             </p>
-
             <p>
-              <span className="font-semibold text-gray-900">Location:</span>{" "}
-              Aurangabad, Maharashtra
+              ✉️{" "}
+              <a href="mailto:jadhavvicky117@gmail.com" className="hover:text-[#C9A874]">
+                jadhavvicky117@gmail.com
+              </a>
             </p>
-
-            <p>
-              <span className="font-semibold text-gray-900">Working Hours:</span>{" "}
-              Mon – Sat, 9AM – 7PM
-            </p>
+            <p>📍 Aurangabad, Maharashtra</p>
+            <p>⏰ Mon – Sat, 9:00 AM – 7:00 PM</p>
           </div>
 
-          <a
-            href="https://maps.google.com?q=Aurangabad"
-            target="_blank"
-            className="inline-block mt-4 px-7 py-2 bg-[#C9A874] text-white font-semibold rounded-md hover:bg-yellow-600 transition"
-          >
-            View on Map
-          </a>
+          <div className="flex flex-wrap gap-4 pt-4">
+            <a
+              href="tel:+917028060440"
+              className="px-6 py-3 bg-gradient-to-r from-[#C9A874] to-[#bfa66a] text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+            >
+              Call Now
+            </a>
+            <a
+              href="https://maps.google.com?q=Aurangabad"
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-3 border border-[#C9A874] text-[#C9A874] rounded-full font-semibold hover:bg-[#C9A874] hover:text-white transition-all"
+            >
+              View Map
+            </a>
+          </div>
         </motion.div>
 
-        {/* Right Form */}
+        {/* RIGHT – Contact Form */}
         <motion.form
           onSubmit={handleSubmit}
-          className="space-y-10"
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
+          className="bg-white rounded-3xl shadow-xl p-10 space-y-6 hover:shadow-2xl transition-all"
         >
-          {/* Input Fields */}
-          {[
-            { label: "Full Name *", name: "name", type: "text" },
-            { label: "Email *", name: "email", type: "email" },
-            { label: "Phone Number *", name: "phone", type: "tel" },
-          ].map((field) => (
-            <div key={field.name}>
-              <label className="block mb-2 text-gray-900 font-medium">
-                {field.label}
-              </label>
-              <input
-                name={field.name}
-                type={field.type}
-                required
-                value={form[field.name]}
-                onChange={handleChange}
-                className="w-full bg-transparent border-b border-gray-400 pb-2 focus:outline-none focus:border-yellow-500 transition"
-              />
-            </div>
-          ))}
-
-          {/* Message */}
-          <div>
-            <label className="block mb-2 text-gray-900 font-medium">
-              Message *
-            </label>
-            <textarea
-              name="message"
-              rows="3"
-              required
-              value={form.message}
+          {/** Name */}
+          <div className="relative">
+            <input
+              name="name"
+              value={form.name}
               onChange={handleChange}
-              className="w-full bg-transparent border-b border-gray-400 pb-2 focus:outline-none focus:border-yellow-500 transition resize-none"
+              required
+              placeholder="Your Name"
+              className="w-full border border-gray-300 rounded-lg px-4 pt-5 pb-3 focus:outline-none focus:border-[#C9A874] focus:ring-1 focus:ring-[#C9A874] transition-all"
             />
+            <label className="absolute top-1 left-4 text-gray-400 text-sm pointer-events-none">
+              Name
+            </label>
           </div>
 
-          {/* Button */}
-          <motion.button
+          {/** Phone */}
+          <div className="relative">
+            <input
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+              required
+              pattern="[0-9]{10}"
+              placeholder="Phone Number"
+              className="w-full border border-gray-300 rounded-lg px-4 pt-5 pb-3 focus:outline-none focus:border-[#C9A874] focus:ring-1 focus:ring-[#C9A874] transition-all"
+            />
+            <label className="absolute top-1 left-4 text-gray-400 text-sm pointer-events-none">
+              Phone Number
+            </label>
+          </div>
+
+          {/** Message */}
+          <div className="relative">
+            <textarea
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+              rows="4"
+              placeholder="Event type, date & location (optional)"
+              className="w-full border border-gray-300 rounded-lg px-4 pt-5 pb-3 resize-none focus:outline-none focus:border-[#C9A874] focus:ring-1 focus:ring-[#C9A874] transition-all"
+            ></textarea>
+            <label className="absolute top-1 left-4 text-gray-400 text-sm pointer-events-none">
+              Message
+            </label>
+          </div>
+
+          {/** Submit Button */}
+          <button
             type="submit"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-[#C9A874] text-white font-semibold rounded-md hover:bg-yellow-600 transition"
+            className="w-full py-3 bg-gradient-to-r from-[#C9A874] to-[#bfa66a] text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
           >
-            Send Message
-          </motion.button>
+            Send Enquiry
+          </button>
+
+          {success && (
+            <p className="text-green-600 text-center font-medium mt-2">
+              ✅ Your enquiry has been sent successfully!
+            </p>
+          )}
         </motion.form>
       </div>
     </section>
   );
-}
+};
 
 export default Contact;
